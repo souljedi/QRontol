@@ -6,6 +6,6 @@ The main idea is to provide a tangible interface to control user-defined actions
 # System overview
 * printed QR code tags
 * QR code reader which either is a
- * custom reader: interprets the code and triggers a command or
- * generic reader: visits a special URL, that triggers a command elsewhere
+  * custom reader: interprets the code and triggers a command or
+  * generic reader: visits a special URL, that triggers a command elsewhere
 * command server: receives command and triggers a command/action at any third party API
