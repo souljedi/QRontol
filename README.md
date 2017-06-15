@@ -1,14 +1,19 @@
 # QRontol
-Control stuff via QR codes, that trigger python scripts.
+Control stuff via QR codes.
 
-The main idea is to provide a tangible interface to control user-defined actions, e.g., as an alternative to a touch screen interface. The inspiration comes from the "old way" of browsing for music, e.g., by flipping through some LP or CD albums covers in a box. So one of the use cases is to create/print album QR cards, e.g., having a set of cards with QR codes on them. Then one can browse through the deck of cards and pick an album, scan it which triggers an action that starts the playlist on a streaming music service or starts the album in a local mp3 player etc. 
+The main goal of this project is to provide a tangible interface to trigger user-defined actions. While not meant to completly replace other interfaces, this is meant to provide an alternative interaction metaphor for certain actions. The inspiration came from the "old analog way" of browsing for music, e.g., flipping through some LP or CD albums covers in a box. This directly leads to one use cases, printing out and laminating QR coded cards with album art. In this case, one can literally browse through a deck of cards and hand pick an album. The selected card can be scanned, which triggers an action that starts the playlist on a streaming music service or starts the album in a local mp3 player etc. The system can be potentially also used by small kids, without having to navigate any menues or getting distracted by other apps on a phone or tablet.
 
 # System overview
-* printed QR code tags
-* QR code reader which either is a
-  * custom reader: interprets the code and triggers a command or
-  * generic reader: visits a special URL, that triggers a command elsewhere
-* command server: receives command and triggers a command/action at any third party API
+* QR code card generator: svg-template and python script
+  * the script will autogenerate QR codes and register them with the command server (see below),
+  * populate the svg file, e.g., based on some csv input file, or using some scraper
+  * the svg file, can be converted to a PDF and then be printed and laminated by the user
+* QR code reader:
+  * generic reader: any QR reader app on a smartphone; reads an URL from the QR code, that triggers via a webhook the command server
+  * custom reader: runs on a dedicated device, e.g., [octocam](https://shop.pimoroni.com/products/octocam-pi-zero-w-project-kit); reads a numeric sequence from the QR code and pass it on to the command server
+* command server: implemented in python
+  * has a database of QR codes associated with actions
+  * receives a decoded QR code and triggers a command/action of a third party API
 
 ## Getting Started
 
@@ -23,6 +28,8 @@ Give examples
 ```
 
 ### Installing
+
+pip integraton is planed for later and will be documented here.
 
 A step by step series of examples that tell you have to get a development env running
 
